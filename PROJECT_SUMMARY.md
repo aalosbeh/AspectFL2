@@ -8,9 +8,9 @@ This document provides a comprehensive overview of the AspectFL project delivera
 
 **Title**: AspectFL: Aspect-Oriented Programming for Trustworthy and Compliant Federated Learning Systems
 
-**Authors**: Dr. Alexandra Chen (Stanford), Prof. Michael Rodriguez (MIT), Dr. Sarah Kim (CMU), Prof. David Thompson (UC Berkeley)
+**Authors**: Dr. Anas AlSobeh(SIUC,USA)
 
-**Journal**: Information (ISSN 2078-2489)
+**Journal**: .......
 
 **Abstract**: We introduce AspectFL, a novel aspect-oriented programming framework that seamlessly integrates trust, compliance, and security concerns into federated learning systems through cross-cutting aspect weaving. Our framework addresses fundamental challenges in federated learning trustworthiness through four core aspects: FAIR compliance, security threat detection, comprehensive provenance tracking, and institutional policy enforcement.
 
@@ -113,10 +113,6 @@ aspectfl_project/
 │   ├── figures/               # Generated figures
 │   ├── experiment_results.json
 │   └── latex_tables.tex
-├── paper/                      # Research paper
-│   ├── aspectfl_paper.tex     # LaTeX source
-│   ├── aspectfl_paper.md      # Markdown version
-│   └── aspectfl_paper.pdf     # Final PDF
 ├── README.md                   # Project documentation
 ├── DOCUMENTATION.md            # Detailed API docs
 ├── AspectFL_Tutorial.ipynb     # Interactive tutorial
@@ -271,19 +267,12 @@ make test
 
 ## Contact Information
 
-- **Dr. Alexandra Chen**: achen@stanford.edu (Stanford University)
-- **Prof. Michael Rodriguez**: mrodriguez@mit.edu (MIT)
-- **Dr. Sarah Kim**: skim@cmu.edu (Carnegie Mellon University)
-- **Prof. David Thompson**: dthompson@berkeley.edu (UC Berkeley)
+- **Dr. Anas AlSObeh, SIUC, USA
 
 ## Acknowledgments
 
 This research was supported by:
-- National Science Foundation grants CNS-2024XXX and IIS-2024XXX
-- Stanford Research Computing Center
-- MIT Computer Science and Artificial Intelligence Laboratory
-- Carnegie Mellon University School of Computer Science
-- UC Berkeley Department of Electrical Engineering and Computer Sciences
+-
 
 ## License
 
@@ -293,7 +282,4 @@ This project is licensed under the MIT License - see the LICENSE file for detail
 
 **AspectFL**: Enabling trustworthy and compliant federated learning through aspect-oriented programming.
 
-*Generated on: December 6, 2024*
-*Version: 1.0.0*
-*Status: Complete and Ready for Submission*
 
