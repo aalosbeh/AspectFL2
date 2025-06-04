@@ -309,10 +309,7 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 ## Contact
 
-- **Dr. Alexandra Chen** - Stanford University - achen@stanford.edu
-- **Prof. Michael Rodriguez** - MIT - mrodriguez@mit.edu
-- **Dr. Sarah Kim** - Carnegie Mellon University - skim@cmu.edu
-- **Prof. David Thompson** - UC Berkeley - dthompson@berkeley.edu
+- **Dr. Anas AlSobeh ** - Southern Illinois University Carbondale - achen@stanford.edu
 
 ## Links
 
