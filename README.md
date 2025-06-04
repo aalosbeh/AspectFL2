@@ -187,11 +187,7 @@ aspectfl_project/
 │   ├── figures/            # Generated figures
 │   ├── experiment_results.json
 │   └── latex_tables.tex
-├── paper/                   # Research paper
-│   ├── aspectfl_paper.tex
-│   ├── aspectfl_paper.md
-│   └── aspectfl_paper.pdf
-├── data/                    # Synthetic datasets
+├── data/                    
 ├── requirements.txt         # Python dependencies
 ├── setup.py                # Package setup
 ├── Makefile                # Build automation
