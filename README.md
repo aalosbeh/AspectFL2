@@ -311,14 +311,6 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 - **Dr. Anas AlSobeh ** - Southern Illinois University Carbondale - achen@stanford.edu
 
-## Links
-
-- [Research Paper PDF](paper/aspectfl_paper.pdf)
-- [Experimental Results](results/)
-- [Documentation](docs/)
-- [Issues](https://github.com/your-username/aspectfl/issues)
-- [Discussions](https://github.com/your-username/aspectfl/discussions)
-
 ---
 
 **AspectFL**: Enabling trustworthy and compliant federated learning through aspect-oriented programming.
