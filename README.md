@@ -197,7 +197,7 @@ aspectfl_project/
 
 ## Mathematical Framework
 
-AspectFL provides formal mathematical foundations for aspect-oriented federated learning:
+AspectFL provides formal mathematical foundations for AO federated learning:
 
 ### Aspect Weaving Model
 
@@ -265,7 +265,7 @@ We welcome contributions to AspectFL! Please see our contributing guidelines:
 
 ```bash
 # Clone the repository
-git clone https://github.com/your-username/aspectfl.git
+git clone https://github.com/alosbeh/aspectfl2.git
 cd aspectfl
 
 # Install development dependencies
@@ -313,5 +313,5 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 ---
 
-**AspectFL**: Enabling trustworthy and compliant federated learning through aspect-oriented programming.
+AspectFL: Enabling trustworthy and compliant federated learning through aspect-oriented programming.
 
