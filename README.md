@@ -183,10 +183,6 @@ aspectfl_project/
 │   ├── comprehensive_experiments.py
 │   ├── data_analysis.py
 │   └── healthcare_experiment.py
-├── results/                 # Experimental results
-│   ├── figures/            # Generated figures
-│   ├── experiment_results.json
-│   └── latex_tables.tex
 ├── data/                    
 ├── requirements.txt         # Python dependencies
 ├── setup.py                # Package setup
@@ -285,14 +281,14 @@ If you use AspectFL in your research, please cite our paper:
 ```bibtex
 @article{chen2025aspectfl,
   title={AspectFL: Aspect-Oriented Programming for Trustworthy and Compliant Federated Learning Systems},
-  author={Chen, Alexandra and Rodriguez, Michael and Kim, Sarah and Thompson, David},
+  author={Anas AlSobeh, Amani Shatnawi, Aws Maqableh},
   journal={Information},
-  volume={16},
-  number={1},
+  volume={xx},
+  number={xx},
   pages={xxx},
   year={2025},
   publisher={MDPI},
-  doi={10.3390/info16010xxx}
+  doi={xxx}
 }
 ```
 
@@ -300,18 +296,6 @@ If you use AspectFL in your research, please cite our paper:
 
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
-## Acknowledgments
-
-- National Science Foundation grants CNS-2024XXX and IIS-2024XXX
-- Stanford Research Computing Center
-- MIT Computer Science and Artificial Intelligence Laboratory
-- Anonymous reviewers for their valuable feedback
-
-## Contact
-
-- **Dr. Anas AlSobeh ** - Southern Illinois University Carbondale - achen@stanford.edu
-
----
 
 AspectFL: Enabling trustworthy and compliant federated learning through aspect-oriented programming.
 
