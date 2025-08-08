@@ -145,31 +145,6 @@ AspectFL employs a sophisticated aspect-oriented architecture with four core com
 - Real-time compliance monitoring
 - Dynamic policy updates
 
-## Experimental Results
-
-### Performance Comparison
-
-| Scenario | Traditional FL | AspectFL | Improvement |
-|----------|---------------|----------|-------------|
-| Healthcare | 83.4% | 87.1% | +4.52% |
-| Financial | 88.9% AUC | 89.7% AUC | +0.90% |
-
-### Compliance Metrics
-
-| Aspect | Healthcare | Financial |
-|--------|------------|-----------|
-| FAIR Compliance | 0.762 | 0.738 |
-| Security Score | 0.798 | 0.806 |
-| Policy Compliance | 84.3% | 84.3% |
-
-### Security Analysis
-
-| Attack Type | Detection Rate | False Positive Rate |
-|-------------|---------------|-------------------|
-| Data Poisoning | 94% | 3.2% |
-| Model Poisoning | 89% | 3.2% |
-| Byzantine Behavior | 97% | 3.2% |
-
 ## Repository Structure
 
 ```
@@ -247,15 +222,6 @@ python -c "from experiments.healthcare_experiment import run_healthcare_experime
 python -c "from experiments.financial_experiment import run_financial_experiment; run_financial_experiment()"
 ```
 
-## Contributing
-
-We welcome contributions to AspectFL! Please see our contributing guidelines:
-
-1. Fork the repository
-2. Create a feature branch
-3. Make your changes
-4. Add tests for new functionality
-5. Submit a pull request
 
 ### Development Setup
 
@@ -279,7 +245,7 @@ black aspectfl/ experiments/
 If you use AspectFL in your research, please cite our paper:
 
 ```bibtex
-@article{chen2025aspectfl,
+@article{Alsobeh2025aspectfl,
   title={AspectFL: Aspect-Oriented Programming for Trustworthy and Compliant Federated Learning Systems},
   author={Anas AlSobeh, Amani Shatnawi, Aws Maqableh},
   journal={Information},
