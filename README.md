@@ -154,14 +154,9 @@ aspectfl_project/
 │   ├── aspects/             # Aspect implementations
 │   ├── utils/               # Utility functions
 │   └── framework.py         # Main framework
-├── experiments/             # Experimental code
-│   ├── comprehensive_experiments.py
-│   ├── data_analysis.py
-│   └── healthcare_experiment.py
 ├── data/                    
 ├── requirements.txt         # Python dependencies
 ├── setup.py                # Package setup
-├── Makefile                # Build automation
 ├── LICENSE                 # MIT License
 └── README.md               # This file
 ```
