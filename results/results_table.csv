@@ -1,0 +1,3 @@
+Configuration,Final Round,AUC,PR-AUC,Accuracy,Privacy Budget (ε)
+AspectFL (with DP),10,0.7645,0.2249,0.5908,2.00
+Baseline FedAvg,10,0.9982,0.9918,0.9800,N/A

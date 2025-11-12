@@ -1,0 +1,10 @@
+{
+  "epsilon_total": 2.0,
+  "delta": 1e-05,
+  "gradient_clipping_norm_C": 1.0,
+  "noise_multiplier_sigma": 24.224026313026943,
+  "n_rounds": 10,
+  "epsilon_per_round": 0.2,
+  "accountant_type": "moments",
+  "composition_method": "Basic Composition"
+}
