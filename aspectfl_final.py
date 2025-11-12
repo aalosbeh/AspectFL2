@@ -24,6 +24,20 @@ import json
 np.random.seed(42)
 torch.manual_seed(42)
 
+device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
+
+class Net(nn.Module):
+    def __init__(self, n_features):
+        super(Net, self).__init__()
+        self.fc1 = nn.Linear(n_features, 32)
+        self.fc2 = nn.Linear(32, 1)
+        self.sigmoid = nn.Sigmoid()
+
+    def forward(self, x):
+        x = torch.relu(self.fc1(x))
+        x = self.fc2(x)
+        return self.sigmoid(x)
+
 class DifferentialPrivacyConfig:
     """
     Complete Differential Privacy Implementation
@@ -174,22 +188,20 @@ def load_and_prepare_mimic_data(data_dir: str = 'data', test_size: float = 0.2):
     
     return site_train_data, site_test_data, feature_cols
 
-def run_logistic_regression_fl(site_train_data, site_test_data, with_dp=False, 
-                                dp_config=None, n_rounds=10):
+def run_federated_learning(site_train_data, site_test_data, with_dp=False,
+                           dp_config=None, n_rounds=10, local_epochs=5):
     """
-    Run Federated Learning with Logistic Regression
-    More stable and realistic than neural networks for this task
+    Run Federated Learning with PyTorch Neural Network on GPU
     """
-    
-    # Initialize global model
     n_features = site_train_data['site_0'][0].shape[1]
-    global_weights = np.zeros(n_features)
-    global_bias = 0.0
+    global_model = Net(n_features).to(device)
     
-    # Prepare global test set
     X_test_global = np.vstack([X_test for X_test, _ in site_test_data.values()])
     y_test_global = np.concatenate([y_test for _, y_test in site_test_data.values()])
     
+    X_test_global_tensor = torch.tensor(X_test_global, dtype=torch.float32).to(device)
+    y_test_global_tensor = torch.tensor(y_test_global, dtype=torch.float32).view(-1, 1).to(device)
+
     results = {
         'rounds': [],
         'auc': [],
@@ -197,50 +209,57 @@ def run_logistic_regression_fl(site_train_data, site_test_data, with_dp=False,
         'accuracy': [],
         'privacy_spent': []
     }
-    
+
     for round_num in range(n_rounds):
-        # Train local models
-        local_weights = []
-        local_biases = []
+        local_models = []
         local_sizes = []
-        
+
         for site_name, (X_train, y_train) in site_train_data.items():
-            # Train local logistic regression
-            lr = LogisticRegression(
-                max_iter=100,
-                random_state=42,
-                C=1.0,  # Regularization
-                solver='lbfgs'
-            )
-            lr.fit(X_train, y_train)
+            local_model = copy.deepcopy(global_model)
+            local_model.train()
+
+            X_train_tensor = torch.tensor(X_train, dtype=torch.float32).to(device)
+            y_train_tensor = torch.tensor(y_train, dtype=torch.float32).view(-1, 1).to(device)
+
+            optimizer = optim.Adam(local_model.parameters(), lr=0.001)
+            criterion = nn.BCELoss()
+
+            for epoch in range(local_epochs):
+                optimizer.zero_grad()
+                outputs = local_model(X_train_tensor)
+                loss = criterion(outputs, y_train_tensor)
+                loss.backward()
+                optimizer.step()
             
-            local_weights.append(lr.coef_[0])
-            local_biases.append(lr.intercept_[0])
+            local_models.append(local_model)
             local_sizes.append(len(y_train))
         
         # Federated Averaging
+        global_weights = global_model.state_dict()
+        for key in global_weights.keys():
+            global_weights[key] = torch.zeros_like(global_weights[key])
+
         total_size = sum(local_sizes)
-        global_weights = np.zeros(n_features)
-        global_bias = 0.0
-        
-        for w, b, size in zip(local_weights, local_biases, local_sizes):
+        for model, size in zip(local_models, local_sizes):
             weight = size / total_size
-            global_weights += w * weight
-            global_bias += b * weight
+            for key in global_weights.keys():
+                global_weights[key] += model.state_dict()[key] * weight
         
-        # Apply DP noise if enabled (with very small noise for realistic results)
+        global_model.load_state_dict(global_weights)
+
         if with_dp and dp_config:
-            # Add minimal noise to maintain utility
-            noise_scale = 0.01  # Very small for realistic results
-            global_weights += np.random.normal(0, noise_scale, global_weights.shape)
-            global_bias += np.random.normal(0, noise_scale)
+            for param in global_model.parameters():
+                noise = torch.normal(0, dp_config.sigma, param.data.shape).to(device)
+                param.data.add_(noise)
             privacy_spent = dp_config.epsilon_per_round * (round_num + 1)
         else:
             privacy_spent = 0
         
         # Evaluate global model
-        y_pred_proba = 1 / (1 + np.exp(-(X_test_global @ global_weights + global_bias)))
-        y_pred = (y_pred_proba >= 0.5).astype(int)
+        global_model.eval()
+        with torch.no_grad():
+            y_pred_proba = global_model(X_test_global_tensor).cpu().numpy()
+            y_pred = (y_pred_proba >= 0.5).astype(int)
         
         auc = roc_auc_score(y_test_global, y_pred_proba)
         pr_auc = average_precision_score(y_test_global, y_pred_proba)
@@ -421,13 +440,13 @@ if __name__ == '__main__':
     # Run experiments
     print("\n[3/4] Running Federated Learning Experiments...")
     print("\n--- Experiment 1: AspectFL with Differential Privacy ---")
-    results_aspectfl = run_logistic_regression_fl(
+    results_aspectfl = run_federated_learning(
         site_train_data, site_test_data, 
         with_dp=True, dp_config=dp_config, n_rounds=10
     )
     
     print("\n--- Experiment 2: Baseline FedAvg (No DP) ---")
-    results_baseline = run_logistic_regression_fl(
+    results_baseline = run_federated_learning(
         site_train_data, site_test_data,
         with_dp=False, dp_config=None, n_rounds=10
     )
